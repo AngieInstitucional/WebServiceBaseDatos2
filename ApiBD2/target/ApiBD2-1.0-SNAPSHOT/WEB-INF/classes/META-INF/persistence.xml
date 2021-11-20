@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+  <!-- Define Persistence Unit -->
+  <persistence-unit name="my_persistence_unit">
+    <jta-data-source>jdbc/BDDataSource</jta-data-source>
+
+    <class>apibd2.apibd2.PvCodigosBarras</class>
+    <class>apibd2.apibd2.PvNotasCred</class>
+    <class>apibd2.apibd2.PvParametros</class>
+    <class>apibd2.apibd2.PvRoles</class>
+    <class>apibd2.apibd2.PvBitacora</class>
+    <class>apibd2.apibd2.PvDescuentos</class>
+    <class>apibd2.apibd2.PvProveedores</class>
+    <class>apibd2.apibd2.PvPrecios</class>
+    <class>apibd2.apibd2.PvDetallFacVenta</class>
+    <class>apibd2.apibd2.PvDescLiquidacion</class>
+    <class>apibd2.apibd2.PvAbonos</class>
+    <class>apibd2.apibd2.PvSedes</class>
+    <class>apibd2.apibd2.PvClientes</class>
+    <class>apibd2.apibd2.PvProductos</class>
+    <class>apibd2.apibd2.PvFacturasCompra</class>
+    <class>apibd2.apibd2.PvLimiteCredito</class>
+    <class>apibd2.apibd2.PvCuentasCobrar</class>
+    <class>apibd2.apibd2.PvCuentasPagar</class>
+    <class>apibd2.apibd2.PvFacturasVenta</class>
+    <class>apibd2.apibd2.PvPadron</class>
+    <class>apibd2.apibd2.PvPagoFactura</class>
+    <class>apibd2.apibd2.PvProdPromo</class>
+    <class>apibd2.apibd2.PvTipoPromocion</class>
+    <class>apibd2.apibd2.PvAcciones</class>
+    <class>apibd2.apibd2.PvMovimientos</class>
+    <class>apibd2.apibd2.PvInventarios</class>
+    <class>apibd2.apibd2.PvDetallFacCompra</class>
+    <class>apibd2.apibd2.PvFamilias</class>
+    <class>apibd2.apibd2.PvAbonosVentas</class>
+    <class>apibd2.apibd2.PvTiposPago</class>
+    <class>apibd2.apibd2.PvPromociones</class>
+    <class>apibd2.apibd2.PvContactosNotificacion</class>
+    <class>apibd2.apibd2.PvCompania</class>
+  </persistence-unit>
+</persistence>
