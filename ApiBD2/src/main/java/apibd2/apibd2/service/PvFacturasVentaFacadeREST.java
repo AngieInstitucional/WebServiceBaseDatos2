@@ -11,6 +11,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -82,6 +83,16 @@ public class PvFacturasVentaFacadeREST extends AbstractFacade<PvFacturasVenta> {
     @Produces(MediaType.TEXT_PLAIN)
     public String countREST() {
         return String.valueOf(super.count());
+    }
+    
+    @GET
+    @Path("calcateShares/{factId}") 
+    @Produces(MediaType.TEXT_PLAIN)
+    public String calcateShares(@PathParam("factId") Integer factId){
+        Query query = em.createNativeQuery("Select calcular_acciones_ganadas(" + factId+ ") from dual");
+        
+        BigDecimal result = (BigDecimal) query.getSingleResult();
+        return result.toString();
     }
 
     @Override

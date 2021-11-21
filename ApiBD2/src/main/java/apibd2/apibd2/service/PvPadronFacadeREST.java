@@ -7,10 +7,14 @@ package apibd2.apibd2.service;
 
 import apibd2.apibd2.PvPadron;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NamedQuery;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.StoredProcedureQuery;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -82,6 +86,22 @@ public class PvPadronFacadeREST extends AbstractFacade<PvPadron> {
     @Produces(MediaType.TEXT_PLAIN)
     public String countREST() {
         return String.valueOf(super.count());
+    }
+    
+    @GET
+    @Path("copyCensus")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String copyCensus(){
+        Query query = em.createNamedQuery("PvPadron.count");
+        long count = (long) query.getSingleResult();
+        
+        if(count == 0L){
+            StoredProcedureQuery procedure = this.em.createNamedStoredProcedureQuery("READ_FILE");
+            procedure.execute();
+            return "Proceso finalizado";
+        }
+        return "Ya hay datos dentro del padron, trasnferencia de datos abortado.";
+        
     }
 
     @Override

@@ -13,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.NamedStoredProcedureQueries;
+import javax.persistence.NamedStoredProcedureQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -29,7 +31,16 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "PvPadron.findByPadNombre", query = "SELECT p FROM PvPadron p WHERE p.padNombre = :padNombre"),
     @NamedQuery(name = "PvPadron.findByPadApellidos1", query = "SELECT p FROM PvPadron p WHERE p.padApellidos1 = :padApellidos1"),
     @NamedQuery(name = "PvPadron.findByPadApellidos2", query = "SELECT p FROM PvPadron p WHERE p.padApellidos2 = :padApellidos2"),
-    @NamedQuery(name = "PvPadron.findByPadCedula", query = "SELECT p FROM PvPadron p WHERE p.padCedula = :padCedula")})
+    @NamedQuery(name = "PvPadron.findByPadCedula", query = "SELECT p FROM PvPadron p WHERE p.padCedula = :padCedula"),
+    @NamedQuery(name = "PvPadron.count", query = "SELECT COUNT(p) FROM PvPadron p")})
+
+@NamedStoredProcedureQueries({
+    @NamedStoredProcedureQuery(
+        name="READ_FILE",
+        procedureName="READ_FILE",
+        parameters={}
+    )
+})
 public class PvPadron implements Serializable {
 
     private static final long serialVersionUID = 1L;
