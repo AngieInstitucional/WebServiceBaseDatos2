@@ -15,6 +15,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.NamedStoredProcedureQueries;
+import javax.persistence.NamedStoredProcedureQuery;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -32,6 +36,20 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "PvParametros.findByParContrasena", query = "SELECT p FROM PvParametros p WHERE p.parContrasena = :parContrasena"),
     @NamedQuery(name = "PvParametros.findByParCorreo", query = "SELECT p FROM PvParametros p WHERE p.parCorreo = :parCorreo"),
     @NamedQuery(name = "PvParametros.findByParEstado", query = "SELECT p FROM PvParametros p WHERE p.parEstado = :parEstado")})
+
+@NamedStoredProcedureQueries({
+    @NamedStoredProcedureQuery(
+            name = "PROC_Registrar_Usuario",
+            procedureName = "PROC_Registrar_Usuario",
+            parameters = {
+                @StoredProcedureParameter(name = "nombre", type = String.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "contrasenna", type = String.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "rol", type = String.class, mode = ParameterMode.IN),
+                @StoredProcedureParameter(name = "correo", type = String.class, mode = ParameterMode.IN)
+
+            }
+    )
+})
 public class PvParametros implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -152,5 +170,5 @@ public class PvParametros implements Serializable {
     public String toString() {
         return "apibd2.apibd2.PvParametros[ parId=" + parId + " ]";
     }
-    
+
 }

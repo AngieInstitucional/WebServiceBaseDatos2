@@ -6,6 +6,7 @@
 package apibd2.apibd2;
 
 import java.io.Serializable;
+import java.lang.reflect.Parameter;
 import java.math.BigDecimal;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -14,7 +15,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.NamedStoredProcedureQueries;
+import javax.persistence.NamedStoredProcedureQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -30,6 +35,17 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "PvRoles.findByRolId", query = "SELECT p FROM PvRoles p WHERE p.rolId = :rolId"),
     @NamedQuery(name = "PvRoles.findByRolNombre", query = "SELECT p FROM PvRoles p WHERE p.rolNombre = :rolNombre"),
     @NamedQuery(name = "PvRoles.findByRolContrasenna", query = "SELECT p FROM PvRoles p WHERE p.rolContrasenna = :rolContrasenna")})
+ 
+@NamedStoredProcedureQueries({
+    @NamedStoredProcedureQuery(
+        name="CREAR_ROLES",
+        procedureName="CREAR_ROLES",
+        parameters={
+        @StoredProcedureParameter(name="nombre",type=String.class,mode=ParameterMode.IN),
+        @StoredProcedureParameter(name="contrasenna",type=String.class,mode=ParameterMode.IN)
+        }
+    )
+})
 public class PvRoles implements Serializable {
 
     private static final long serialVersionUID = 1L;

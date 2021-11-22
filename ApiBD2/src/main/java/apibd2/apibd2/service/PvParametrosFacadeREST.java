@@ -10,7 +10,9 @@ import java.math.BigDecimal;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
+import javax.persistence.StoredProcedureQuery;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -88,5 +90,20 @@ public class PvParametrosFacadeREST extends AbstractFacade<PvParametros> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
+    @GET
+    @Path("{nombreUsuario}/{contrasenna}/{nombreRol}/{correo}")
+    @Produces({MediaType.TEXT_PLAIN})
+    public String createRoles(@PathParam("nombreUsuario") String nombre, @PathParam("contrasenna") String contrasenna,
+            @PathParam("nombreRol") String rol,@PathParam("correo") String correo) {
+
+        StoredProcedureQuery procedure = this.em.createNamedStoredProcedureQuery("PROC_Registrar_Usuario");
+        procedure.registerStoredProcedureParameter("nombre", String.class, ParameterMode.IN).setParameter("nombre", nombre);
+        procedure.registerStoredProcedureParameter("contrasenna", String.class, ParameterMode.IN).setParameter("contrasenna",contrasenna);
+        procedure.registerStoredProcedureParameter("rol", String.class, ParameterMode.IN).setParameter("rol",rol);
+        procedure.registerStoredProcedureParameter("correo", String.class, ParameterMode.IN).setParameter("correo",correo);
+        procedure.execute();
+        return "Proceso realizado";
+    }
+
 }

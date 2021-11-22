@@ -10,7 +10,10 @@ import java.math.BigDecimal;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
+import javax.persistence.StoredProcedureQuery;
+import javax.persistence.TemporalType;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -88,5 +91,16 @@ public class PvRolesFacadeREST extends AbstractFacade<PvRoles> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
+    @GET
+    @Path("{nombre}/{contrasenna}")
+    @Produces({MediaType.TEXT_PLAIN})
+    public String createRoles(@PathParam("nombre") String nombre, @PathParam("contrasenna") String contrasenna) {
+
+        StoredProcedureQuery procedure = this.em.createNamedStoredProcedureQuery("CREAR_ROLES");
+        procedure.registerStoredProcedureParameter("nombre", String.class, ParameterMode.IN).setParameter("nombre", nombre);
+        procedure.registerStoredProcedureParameter("contrasenna", String.class, ParameterMode.IN).setParameter("contrasenna", contrasenna);
+        procedure.execute();
+        return "Proceso realizado";
+    }
 }
